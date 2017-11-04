@@ -4,17 +4,19 @@ import (
 	"../glutil"
 )
 
+// Vec2f is a two dimensional point
 type Vec2f struct {
 	X float32
 	Y float32
 }
 
-// Shape is a container of the count and the form of the polygons
+// Shape is a container of the polygon count and the vertex array object of the constructed shape
 type Shape struct {
 	PolygonCount int32
 	Vao uint32
 }
 
+// NewQuadrilateral creates a new four sided shape
 func NewQuadrilateral(topLeft, topRight, bottomLeft, bottomRight Vec2f) *Shape {
 	s := new(Shape)
 
@@ -33,6 +35,7 @@ func NewQuadrilateral(topLeft, topRight, bottomLeft, bottomRight Vec2f) *Shape {
 	return s
 }
 
+// NewRectangle create a rectangle
 func NewRectangle(bottomLeft, topRight Vec2f) *Shape {
 	return NewQuadrilateral(Vec2f{bottomLeft.X, topRight.Y}, topRight, bottomLeft, Vec2f{topRight.X, bottomLeft.Y})
 }

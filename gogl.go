@@ -14,18 +14,6 @@ const (
 )
 
 var (
-	triangle = []float32 {
-		-0.25, 0.5, 0, // top
-		-0.75, -0.5, 0, // left
-		0.25, -0.5, 0, // right
-	}
-
-	triangle2 = []float32 {
-		0.25, -0.5, 0, // bottom
-		-0.25, 0.5, 0, // left
-		0.75, 0.5, 0, // right
-	}
-
 	vertexShaderSource = `
 		#version 410
 		in vec3 vp;
