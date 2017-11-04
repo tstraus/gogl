@@ -44,3 +44,5 @@ func main() {
 		glfw.PollEvents()
 	}
 }
+
+// ubuntu needed: sudo apt install libglu1-mesa-dev -y
