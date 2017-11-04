@@ -20,7 +20,7 @@ func InitGL(width, height int, vertexShaderSource string, fragmentShaderSource s
 
 	glfw.WindowHint(glfw.ContextVersionMajor, 4)
 	glfw.WindowHint(glfw.ContextVersionMinor, 1)
-	glfw.WindowHint(glfw.Resizable, glfw.True)
+	glfw.WindowHint(glfw.Resizable, glfw.False)
 	glfw.WindowHint(glfw.OpenGLProfile, glfw.OpenGLCoreProfile)
 	glfw.WindowHint(glfw.OpenGLForwardCompatible, glfw.True)
 
@@ -63,6 +63,7 @@ func MakeVao(points []float32) uint32 {
 	return vao
 }
 
+// compileShader compiles a shader from source
 func compileShader(source string, shaderType uint32) (uint32, error) {
 	shader := gl.CreateShader(shaderType)
 

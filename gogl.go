@@ -5,11 +5,12 @@ import (
 	"github.com/go-gl/glfw/v3.2/glfw"
 
 	"./glutil"
+	"./glshapes"
 )
 
 const (
-	w = 640
-	h = 480
+	w = 1280
+	h = 720
 )
 
 var (
@@ -37,18 +38,18 @@ var (
 		#version 410
 		out vec4 frag_colour;
 		void main() {
-			frag_colour = vec4(1, 1, 1, 1);
+			frag_colour = vec4(1, 0.5, 0, 1);
 		}
 	` + "\x00"
 )
 
-func draw(objects []uint32, window *glfw.Window, program uint32) {
+func draw(objects []*glshapes.Shape, window *glfw.Window, program uint32) {
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 	gl.UseProgram(program)
 
 	for _, object := range objects {
-		gl.BindVertexArray(object)
-		gl.DrawArrays(gl.TRIANGLES, 0, int32(len(triangle) / 3))
+		gl.BindVertexArray(object.Vao)
+		gl.DrawArrays(gl.TRIANGLES, 0, object.PolygonCount)
 	}
 
 	window.SwapBuffers()
@@ -61,9 +62,8 @@ func main() {
 
 	gl.ClearColor(0, 0.5, 1.0, 1.0)
 
-	var objects []uint32
-	objects = append(objects, glutil.MakeVao(triangle))
-	objects = append(objects, glutil.MakeVao(triangle2))
+	var objects []*glshapes.Shape
+	objects = append(objects, glshapes.NewRectangle(glshapes.Vec2f{-0.5, -0.5}, glshapes.Vec2f{0.5, 0.5}))
 
 	for !window.ShouldClose() {
 		draw(objects, window, program)
